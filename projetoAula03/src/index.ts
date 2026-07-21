@@ -2,7 +2,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import express from "express";
 
-import { registerController } from "./controllers/authController.js";
+import { authController, registerController } from "./controllers/authController.js";
+import { testController } from "./controllers/testController.js";
+
+import {jwtVerify} from "./middlewares/jwtVerify.js";
 
 dotenv.config();
 
@@ -16,7 +19,10 @@ app.get("/ping", (request, response) => {
 });
 
 // USUARIOS
+app.post("/registro", registerController);
+app.post("/auth", authController);
 
-app.post("/registro", registerController)
+// TESTE
+app.get("/teste-privado", jwtVerify, testController);
 
 app.listen(3333, () => console.log("Servidor iniciado com sucesso"));
