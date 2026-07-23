@@ -9,7 +9,7 @@ const productSchema = new  Schema({
     type: Number,
     required: true,
   },
-  imagem: {
+  filename: {
     type: String,
     required: true,    
   },

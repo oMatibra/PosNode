@@ -1,17 +1,21 @@
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 if (
   !process.env.CLOUDINARY_CLOUD_NAME ||
   !process.env.CLOUDINARY_API_KEY ||
-  !process.env.CLOUDINARY_API_SECRET ||
-  !process.env.CLOUDINARY_API_ENVIRONMENT_VARIABLE 
+  !process.env.CLOUDINARY_API_SECRET
 ) {
-  throw new Error("Variáveis do Firebase não configuradas.");
+  throw new Error("Variáveis do Cloudinary não configuradas.");
 }
 
-export default {
-  cloudinaryConfig: {
-    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-    apiKey: process.env.CLOUDINARY_API_KEY,
-    apiSecret: process.env.CLOUDINARY_API_SECRET,
-    apiEnvironmentVariable: process.env.CLOUDINARY_API_ENVIRONMENT_VARIABLE
-  },
-};
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
+});
+
+export default cloudinary;
