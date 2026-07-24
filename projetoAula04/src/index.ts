@@ -8,7 +8,7 @@ import { categoryControllerDelete, categoryControllerGetAll, categoryControllerP
 
 import {jwtVerify} from "./middlewares/jwtVerify.js";
 import {upload} from "./middlewares/upload.js";
-import { productControllerPost } from "./controllers/productController.js";
+import { productControllerDelete, productControllerGetAll, productControllerGetById, productControllerPost, productControllerUpdate } from "./controllers/productController.js";
 
 dotenv.config();
 
@@ -33,5 +33,9 @@ app.delete("/categorias/:id", jwtVerify, categoryControllerDelete);
 
 //PRODUTOS
 app.post("/produtos", jwtVerify, upload.single("filename"), productControllerPost);
+app.get("/produtos", jwtVerify, productControllerGetAll);
+app.get("/produtos/:id", jwtVerify, productControllerGetById);
+app.delete("/produtos/:id", jwtVerify, productControllerDelete);
+app.put("/produtos/:id", jwtVerify, productControllerUpdate);
 
 app.listen(3333, () => console.log("Servidor iniciado com sucesso"));
